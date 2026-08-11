@@ -166,7 +166,7 @@
 
     <main class="max-w-7xl mx-auto px-4 md:px-6 py-8 flex-grow w-full font-sans">
         
-        <div class="bg-white border border-slate-200/80 rounded-2xl p-5 mb-8 shadow-sm flex items-start justify-between gap-4">
+        <div class="bg-white border border-slate-200/80 rounded-2xl p-5 mb-8 shadow-sm flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4">
             <div>
                 <h2 id="current-section-title" class="text-lg font-black tracking-tight text-slate-900 transition-all duration-300 flex items-center gap-2">
                     📈 Active vs. Retired Member Real-Time Tax & Income Visualizer
@@ -175,6 +175,10 @@
                     Compare active employment tax deductions, union dues (T4 Box 44 / CRA Line 21200), RPP (T4 Box 20 / CRA Line 20700), and Group/Employer RRSP (T4 Box 40/Receipts) tax shields directly alongside passive retirement income rules.
                 </p>
             </div>
+            <button onclick="openUserGuide()" class="shrink-0 bg-blue-700 hover:bg-blue-600 text-white font-bold text-xs px-4 py-2.5 rounded-xl shadow-sm transition flex items-center justify-center gap-2">
+                <span aria-hidden="true">🧭</span>
+                Need step-by-step instructions?
+            </button>
         </div>
 
         <details open class="mb-8 rounded-2xl border-2 border-amber-300 bg-amber-50 shadow-sm overflow-hidden">
@@ -956,6 +960,111 @@
         </div>
     </footer>
 
+    <div id="user-guide-modal" class="fixed inset-0 z-[100] hidden" role="dialog" aria-modal="true" aria-labelledby="user-guide-title">
+        <div class="absolute inset-0 bg-slate-950/70 backdrop-blur-sm" onclick="closeUserGuide()" aria-hidden="true"></div>
+        <div class="absolute inset-3 sm:inset-8 lg:inset-x-[12%] lg:inset-y-10 bg-slate-50 rounded-2xl shadow-2xl border border-slate-300 overflow-hidden flex flex-col">
+            <div class="bg-gradient-to-r from-blue-800 to-slate-900 text-white px-5 md:px-7 py-5 flex items-start justify-between gap-4">
+                <div>
+                    <span class="text-[10px] font-bold text-blue-200 uppercase tracking-widest">Beginner Guide</span>
+                    <h2 id="user-guide-title" class="text-xl md:text-2xl font-black font-display mt-1">How to Use the Alberta Pension &amp; Tax Visualizer</h2>
+                    <p class="text-xs text-blue-100 mt-1">A practical walkthrough for exploring scenarios and preparing better questions.</p>
+                </div>
+                <button id="close-user-guide" onclick="closeUserGuide()" class="w-9 h-9 rounded-xl bg-white/10 hover:bg-white/20 border border-white/20 text-xl leading-none shrink-0" aria-label="Close instructions">×</button>
+            </div>
+
+            <div class="overflow-y-auto custom-scrollbar p-5 md:p-7">
+                <div class="max-w-5xl mx-auto space-y-7">
+                    <div class="bg-amber-50 border border-amber-300 rounded-xl p-4 text-xs text-amber-950 leading-relaxed">
+                        <strong>Start with the right expectation:</strong> this tool compares simplified scenarios. It cannot calculate your official LAPP pension or final tax return. Use its results to understand the moving parts and decide what to verify.
+                    </div>
+
+                    <section>
+                        <h3 class="text-base font-black text-slate-900 mb-3 flex items-center gap-2"><span class="w-7 h-7 rounded-full bg-blue-700 text-white text-xs flex items-center justify-center">1</span> Gather your information</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-xs">
+                            <div class="bg-white border border-slate-200 rounded-xl p-4">
+                                <h4 class="font-bold text-slate-900 mb-2">For your current-work scenario</h4>
+                                <ul class="list-disc pl-5 space-y-1.5 text-slate-600">
+                                    <li>Your latest T4, pay statement, or annual salary estimate</li>
+                                    <li>Employment income — usually T4 Box 14</li>
+                                    <li>Annual union dues — T4 Box 44</li>
+                                    <li>Your employee RPP contributions — T4 Box 20</li>
+                                    <li>Your Pension Adjustment — T4 Box 52</li>
+                                </ul>
+                            </div>
+                            <div class="bg-white border border-slate-200 rounded-xl p-4">
+                                <h4 class="font-bold text-slate-900 mb-2">For your retirement scenario</h4>
+                                <ul class="list-disc pl-5 space-y-1.5 text-slate-600">
+                                    <li>Your official LAPP estimate or annual statement</li>
+                                    <li>Estimated CPP and OAS amounts and intended start ages</li>
+                                    <li>Other taxable pension or registered-account withdrawals</li>
+                                    <li>Expected taxable employment income after retirement, if any</li>
+                                    <li>Do not include TFSA withdrawals as taxable income</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </section>
+
+                    <section>
+                        <h3 class="text-base font-black text-slate-900 mb-3 flex items-center gap-2"><span class="w-7 h-7 rounded-full bg-blue-700 text-white text-xs flex items-center justify-center">2</span> Build the active-member picture</h3>
+                        <div class="bg-white border border-slate-200 rounded-xl p-4 text-xs text-slate-700 leading-relaxed space-y-3">
+                            <p>Open <strong>Active vs Retired Visualizer</strong>. On the left, move <strong>Active Gross Salary</strong> to your estimated annual employment income before deductions.</p>
+                            <p>Set <strong>Annual Union Dues</strong> and <strong>Employee Pension (RPP)</strong> using T4 Boxes 44 and 20. These reduce taxable income in this simplified model.</p>
+                            <p>Enter <strong>Pension Adjustment (PA)</strong> from T4 Box 52 for reference. A PA normally reduces the new RRSP room reported for the following year; it is not treated as a cash deduction or current-year tax deduction by this tool.</p>
+                            <p>Review estimated take-home pay, federal and Alberta tax, CPP/CPP2, EI, and the tax effect of union dues and RPP contributions. Use the <strong>Federal</strong> and <strong>Alberta</strong> buttons to see which brackets contain portions of the taxable income.</p>
+                        </div>
+                    </section>
+
+                    <section>
+                        <h3 class="text-base font-black text-slate-900 mb-3 flex items-center gap-2"><span class="w-7 h-7 rounded-full bg-blue-700 text-white text-xs flex items-center justify-center">3</span> Build the retirement picture</h3>
+                        <div class="bg-white border border-slate-200 rounded-xl p-4 text-xs text-slate-700 leading-relaxed space-y-3">
+                            <p>On the right, set <strong>Annual Pension / Retirement Income</strong> to the total taxable retirement income you want to explore. This might include taxable LAPP pension payments, CPP, OAS, RRSP/RRIF withdrawals, and other taxable pensions.</p>
+                            <p>Do not include TFSA withdrawals in this taxable-income slider. If you plan to keep working, remember that employment earnings can still attract CPP and EI deductions and are not fully modelled in the retired-member side.</p>
+                            <p>Compare estimated net retirement cash flow with current take-home pay. The difference is a starting point for planning—not a conclusion about affordability or retirement readiness.</p>
+                        </div>
+                    </section>
+
+                    <section>
+                        <h3 class="text-base font-black text-slate-900 mb-3 flex items-center gap-2"><span class="w-7 h-7 rounded-full bg-blue-700 text-white text-xs flex items-center justify-center">4</span> Explore timing and benefits</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-3 text-xs">
+                            <div class="bg-emerald-50 border border-emerald-200 rounded-xl p-4"><strong class="text-emerald-900 block mb-1">Public Pension</strong><span class="text-slate-600">Review CPP and OAS ages, maximum reference amounts, and the effect of starting CPP early.</span></div>
+                            <div class="bg-indigo-50 border border-indigo-200 rounded-xl p-4"><strong class="text-indigo-900 block mb-1">Retirement Stack Map</strong><span class="text-slate-600">Click each coloured layer to understand when LAPP, CPP, OAS, and personal savings may apply.</span></div>
+                            <div class="bg-sky-50 border border-sky-200 rounded-xl p-4"><strong class="text-sky-900 block mb-1">Official Sources</strong><span class="text-slate-600">Use the source table near the bottom of the page to check each published input at its official website.</span></div>
+                        </div>
+                    </section>
+
+                    <section>
+                        <h3 class="text-base font-black text-slate-900 mb-3 flex items-center gap-2"><span class="w-7 h-7 rounded-full bg-blue-700 text-white text-xs flex items-center justify-center">5</span> Try more than one scenario</h3>
+                        <div class="bg-white border border-slate-200 rounded-xl p-4 text-xs text-slate-700 leading-relaxed">
+                            <p class="mb-3">Change one assumption at a time so you can see what caused the result to move. Useful comparisons include:</p>
+                            <ul class="list-disc pl-5 space-y-1.5 text-slate-600">
+                                <li>Retiring at different ages or with different official LAPP estimates</li>
+                                <li>Starting CPP at 60, 65, or later</li>
+                                <li>Different taxable RRSP/RRIF withdrawal amounts</li>
+                                <li>Using TFSA savings instead of taxable withdrawals in a particular year</li>
+                                <li>Working part-time after retirement</li>
+                                <li>Income levels near an OAS recovery-tax threshold</li>
+                            </ul>
+                        </div>
+                    </section>
+
+                    <section>
+                        <h3 class="text-base font-black text-slate-900 mb-3 flex items-center gap-2"><span class="w-7 h-7 rounded-full bg-blue-700 text-white text-xs flex items-center justify-center">6</span> Take these questions to the right people</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-3 text-xs">
+                            <div class="bg-white border border-slate-200 rounded-xl p-4"><strong class="text-slate-900 block mb-2">Ask LAPP</strong><ul class="list-disc pl-4 space-y-1 text-slate-600"><li>What is my official pension at each possible retirement date?</li><li>Is it reduced or unreduced?</li><li>How do survivor and integrated-pension options change it?</li></ul></div>
+                            <div class="bg-white border border-slate-200 rounded-xl p-4"><strong class="text-slate-900 block mb-2">Ask a tax professional</strong><ul class="list-disc pl-4 space-y-1 text-slate-600"><li>Which income and credits apply to me?</li><li>Would pension splitting help?</li><li>How could withdrawals affect OAS and other benefits?</li></ul></div>
+                            <div class="bg-white border border-slate-200 rounded-xl p-4"><strong class="text-slate-900 block mb-2">Ask a qualified planner</strong><ul class="list-disc pl-4 space-y-1 text-slate-600"><li>Is the projected cash flow sustainable?</li><li>What assumptions should be stress-tested?</li><li>How should taxes, inflation, risk, and estate goals fit together?</li></ul></div>
+                        </div>
+                    </section>
+
+                    <div class="bg-slate-900 text-white rounded-xl p-5 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+                        <div><strong class="block text-sm">Ready to explore?</strong><span class="text-xs text-slate-300">Begin with your active income, then compare one retirement-income scenario.</span></div>
+                        <button onclick="closeUserGuide(); switchTab('tax-infographic'); window.scrollTo({top: 0, behavior: 'smooth'});" class="bg-blue-600 hover:bg-blue-500 text-white text-xs font-bold px-4 py-2.5 rounded-xl shrink-0">Start the Visualizer</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div id="toast-notification" class="fixed bottom-6 right-6 z-50 bg-slate-900 border border-emerald-800 text-white px-5 py-4 rounded-2xl shadow-2xl flex items-center gap-3 max-w-sm translate-y-10 opacity-0 pointer-events-none transition-all duration-300">
         <div class="w-8 h-8 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 flex items-center justify-center shrink-0">
             ✓
@@ -1068,6 +1177,24 @@
         const formatCurrency = (val) => new Intl.NumberFormat('en-CA', { style: 'currency', currency: 'CAD' }).format(val);
         const formatNumber = (val) => new Intl.NumberFormat('en-CA', { maximumFractionDigits: 0 }).format(val);
         const formatPercent = (val) => (val * 100).toFixed(2) + '%';
+
+        function openUserGuide() {
+            const modal = document.getElementById('user-guide-modal');
+            modal.classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+            document.getElementById('close-user-guide').focus();
+        }
+
+        function closeUserGuide() {
+            document.getElementById('user-guide-modal').classList.add('hidden');
+            document.body.style.overflow = '';
+        }
+
+        document.addEventListener('keydown', (event) => {
+            if (event.key === 'Escape' && !document.getElementById('user-guide-modal').classList.contains('hidden')) {
+                closeUserGuide();
+            }
+        });
 
         function showToast(msg) {
             const toast = document.getElementById('toast-notification');
