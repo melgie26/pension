@@ -487,9 +487,9 @@
                                     <label for="active-income-slider" class="text-[10px] font-extrabold text-emerald-800 uppercase tracking-wide">
                                         Active Gross Salary ⮕
                                     </label>
-                                    <span class="text-sm font-black text-emerald-700 font-mono" id="active-income-text">$221,000.00</span>
+                                    <span class="text-sm font-black text-emerald-700 font-mono" id="active-income-text">$50,000.00</span>
                                 </div>
-                                <input type="range" id="active-income-slider" min="15000" max="400000" step="1000" value="221000" oninput="onActiveIncomeChange(this.value)" class="w-full h-1.5 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-emerald-600 mb-2">
+                                <input type="range" id="active-income-slider" min="15000" max="400000" step="1000" value="50000" oninput="onActiveIncomeChange(this.value)" class="w-full h-1.5 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-emerald-600 mb-2">
                                 <div class="flex justify-between text-[9px] text-slate-400 font-bold uppercase">
                                     <span>Min: $15k</span>
                                     <span>Max: $400k</span>
@@ -703,9 +703,9 @@
                                     <label for="retired-income-slider" class="text-[10px] font-extrabold text-blue-900 uppercase tracking-wide">
                                         ⬅ Annual Pension / Retirement Income
                                     </label>
-                                    <span class="text-sm font-black text-blue-800 font-mono" id="retired-income-text">$120,000.00</span>
+                                    <span class="text-sm font-black text-blue-800 font-mono" id="retired-income-text">$50,000.00</span>
                                 </div>
-                                <input type="range" id="retired-income-slider" min="15000" max="350000" step="1000" value="120000" dir="rtl" oninput="onRetiredIncomeChange(this.value)" class="w-full h-1.5 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-blue-600 mb-2">
+                                <input type="range" id="retired-income-slider" min="15000" max="350000" step="1000" value="50000" dir="rtl" oninput="onRetiredIncomeChange(this.value)" class="w-full h-1.5 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-blue-600 mb-2">
                                 <div class="flex justify-between text-[9px] text-blue-600 font-bold uppercase">
                                     <span>Max: $350k</span>
                                     <span>Min: $15k</span>
@@ -1076,13 +1076,13 @@
     </div>
 
     <script>
-        let active_income = 221000;
+        let active_income = 50000;
         let active_uniondues = 2400;
         let active_rpp = 0;
         let active_rrsp = 0;
         let active_tab = 'federal';
 
-        let retired_income = 120000;
+        let retired_income = 50000;
         let retired_tab = 'federal';
 
         const CONSTANTS_INFO = {
